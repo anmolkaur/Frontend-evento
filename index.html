@@ -21,17 +21,34 @@
 			<div class="choose">
 
 				<div class="pick-category">
-					<form class="pick-category form-group btn-group-lg" ng-repeat="category in categories" ng-submit="categoryPicked(category.title)" ng-hide="subcategories">
+					<form class="pick-category form-group btn-group-lg" ng-repeat="category in categories" ng-submit="categoryPicked(category.title)" ng-hide="subcategories" ng-hide="events">
 						<button  id="{{category.title}}" type="submit"  class="btn btn-default col-md-4">{{category.title}}</button>
 					</form>
 				</div>
 
 
-				<div class="subcategories btn-group-lg" ng-repeat = "cat in categories | filter: gotCategory[0]" ng-show="subcategories">
-					<div ng-repeat = "subcat in cat.subcategories">
-						<button  id="{{subcat}}" type="submit"  class="btn btn-default col-md-4">{{subcat}}</button>
+
+				<div class = "subcategories">
+					<div ng-repeat="cat in categories | filter: gotCategory[0]">
+						<form class="subcategories form-group btn-group-lg" ng-repeat = "subcat in cat.subcategories" ng-submit="subcatPicked(subcat.name)" ng-show="subcategories" ng-hide="events"> 
+							<button  id="{{subcat.name}}" type="submit"  class="btn btn-default col-md-4">{{subcat.name}}</button>
+						</form>
 					</div>
 				</div>
+
+				<div class="events btn-group-lg" ng-repeat = "cat1 in categories | filter: gotCategory[0]" ng-show="events">
+					<form class="events form-group btn-group-lg" ng-repeat = "subcat1 in cat1.subcategories | filter: gotSubcat[0]" ng-submit="done()" > 
+						<label>{{subcat1.events[random]}}</label>
+						<button>Yes</button>
+						<button>No</button>
+						<!--<button  id="{{subcat.name}}" type="submit"  class="btn btn-default col-md-4">{{subcat.name}}</button>
+					</form>
+					<h1>{{subcat1.name}}</h1>-->
+					<!--<div ng-repeat = "events in subcat.events">
+					<button  id="{{subcat.name}}" type="submit"  class="btn btn-default col-md-4">{{subcat.name}}</button>-->
+					</form>
+				</div>
+
 
 			</div>
 
